@@ -6,7 +6,7 @@ class UsuarioService{
     }
 
     async get(){
-        return this.usuarios
+        return (this.usuarios).usuarios.filter(usuario=>usuario.rol==="alumno")
     }
 }
 

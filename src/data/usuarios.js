@@ -3,15 +3,24 @@ const infoUsuarios={
     usuarios:[
         {
             id:1,
-            nombre:"Lionel"
+            nombre:"Lionel",
+            mail:"a@a.com",
+            usuario:"lmessi",
+            rol:"alumno"
         },
         {
             id:2,
-            nombre:"Lionel"
+            nombre:"Elias",
+            mail:"a@a.com",
+            usuario:"lmessi",
+            rol:"coordinador"
         },
         {
             id:3,
-            nombre:"Lionel"
+            nombre:"Juls",
+            mail:"a@a.com",
+            usuario:"lmessi",
+            rol:"alumno"
         }
     ]
 }
