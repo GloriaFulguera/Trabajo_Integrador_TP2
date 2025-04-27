@@ -7,7 +7,7 @@ app.get('/api',(req,res)=>{
     res.send("Get basico desde index")
 })
 
-app.use('/api/usuario',usuarioRouter)
+app.use('/api/',usuarioRouter)// este quiza me convenga renombrarlo a "alumnoRouter"
 
 const PORT=3000
 
