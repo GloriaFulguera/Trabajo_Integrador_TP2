@@ -1,5 +1,5 @@
 const express= require('express')
-const usuarioRouter=require('./routers/usuario.router')
+const alumnoRouter=require('./routers/alumno.router')
 
 const app=express()
 
@@ -7,7 +7,7 @@ app.get('/api',(req,res)=>{
     res.send("Get basico desde index")
 })
 
-app.use('/api/',usuarioRouter)// este quiza me convenga renombrarlo a "alumnoRouter"
+app.use('/api/',alumnoRouter)
 
 const PORT=3000
 
