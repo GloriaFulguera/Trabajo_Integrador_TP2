@@ -2,7 +2,7 @@ const AlumnoService=require('../services/alumno.services')
 
 const service=new AlumnoService()
 
-async function getUsuarios(req,res){
+async function getAlumnos(req,res){
     try{
         const usuarios= await service.get()
         res.send(usuarios)
@@ -27,7 +27,21 @@ async function getAlumnoId(req,res){
     }
 }
 
+async function postAlumno(req,res){
+    try{
+        const aNuevo=req.body
+        const alumnoNuevo=await service.post(aNuevo)
+        res.send(alumnoNuevo)
+    }
+    catch(error){
+        res.status(400).json({
+            message:error.message
+        })
+    }
+}
+
 module.exports={
-    getUsuarios,
-    getAlumnoId
+    getAlumnos,
+    getAlumnoId,
+    postAlumno
 }

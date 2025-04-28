@@ -3,6 +3,7 @@ const alumnoRouter=require('./routers/alumno.router')
 
 const app=express()
 
+//TO DO: cambiarlo por easter egg
 app.get('/api',(req,res)=>{
     res.send("Get basico desde index")
 })

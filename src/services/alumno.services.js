@@ -17,6 +17,11 @@ class AlumnoService{
         }
         throw new Error("El alumno con id ... no existe")
     }
+
+    async post(alumno){
+        this.usuarios.usuarios.push(alumno)
+        return alumno
+    }
 }
 
 module.exports=AlumnoService
