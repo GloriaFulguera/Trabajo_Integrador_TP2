@@ -1,5 +1,6 @@
 const express= require('express')
 const alumnoRouter=require('./routers/alumno.router')
+const materiaRouter=require('./routers/materia.router')
 
 const app=express()
 
@@ -9,6 +10,7 @@ app.get('/api',(req,res)=>{
 })
 
 app.use('/api/',alumnoRouter)
+app.use('/api/',materiaRouter)
 
 const PORT=3000
 
