@@ -22,6 +22,17 @@ class AlumnoService{
         this.usuarios.usuarios.push(alumno)
         return alumno
     }
+
+    async put(id,alumnoEditado){
+        const alumno=this.usuarios.usuarios.find(x=>x.id==id)
+        alumno.nombre=alumnoEditado.nombre
+        alumno.mail=alumnoEditado.mail
+        alumno.rol=alumnoEditado.rol
+        console.log(alumno)
+        
+        this.usuarios.usuarios.push(alumno)
+        return alumno
+    }
 }
 
 module.exports=AlumnoService

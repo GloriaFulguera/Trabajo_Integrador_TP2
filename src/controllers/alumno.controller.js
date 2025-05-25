@@ -40,8 +40,23 @@ async function postAlumno(req,res){
     }
 }
 
+async function putAlumno(req,res){
+    try{
+        const id=req.params.id
+        const aEdit=req.body
+        const alumnoEdit=await service.put(id,aEdit)
+        res.send(alumnoEdit)
+    }
+    catch(error){
+        res.status(400).json({
+            message:error.message
+        })
+    }
+} 
+
 module.exports={
     getAlumnos,
     getAlumnoId,
-    postAlumno
+    postAlumno,
+    putAlumno
 }
