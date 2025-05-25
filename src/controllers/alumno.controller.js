@@ -54,9 +54,23 @@ async function putAlumno(req,res){
     }
 } 
 
+async function deleteAlumno(req,res){
+    try{
+        const id=req.params.id
+        await service.delete(id)
+        res.send("El alumno ha sido dado de baja")
+    }
+    catch(error){
+        res.status(400).json({
+            message:error.message
+        })
+    }
+}
+
 module.exports={
     getAlumnos,
     getAlumnoId,
     postAlumno,
-    putAlumno
+    putAlumno,
+    deleteAlumno
 }

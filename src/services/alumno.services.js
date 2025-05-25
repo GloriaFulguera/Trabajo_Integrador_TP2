@@ -33,6 +33,10 @@ class AlumnoService{
         this.usuarios.usuarios.push(alumno)
         return alumno
     }
+
+    async delete(id){
+        console.log("eliminando")
+    }
 }
 
 module.exports=AlumnoService
