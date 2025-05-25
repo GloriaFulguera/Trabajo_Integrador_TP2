@@ -24,8 +24,8 @@ class AlumnoService{
     }
 
     async put(id,alumnoEditado){
-        const alumno=this.usuarios.usuarios.find(x=>x.id==id)
-        alumno.nombre=alumnoEditado.nombre
+        const alumno=this.usuarios.usuarios.indexOf(x=>x.id==id)
+        usuarios.usuarios=alumnoEditado.nombre
         alumno.mail=alumnoEditado.mail
         alumno.rol=alumnoEditado.rol
         console.log(alumno)
