@@ -8,7 +8,7 @@ messages({
 })
 
 const paramAlumnoSchema=joi.object({
-    Id:id
+    id:id
 })
 
 module.exports={paramAlumnoSchema}
