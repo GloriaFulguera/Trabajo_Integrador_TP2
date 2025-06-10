@@ -13,6 +13,18 @@ async function crearUsuario(req,res,next){
     }
 }
 
+async function login(req,res,next){
+    try{
+        const data=req.body
+        const result=await service.login(data)
+        res.send(result)
+    }
+    catch(error){
+        next(error)
+    }
+}
+
 module.exports={
-    crearUsuario
+    crearUsuario,
+    login
 }

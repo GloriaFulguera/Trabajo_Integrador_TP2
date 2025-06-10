@@ -11,9 +11,9 @@ app.get('/api',(req,res)=>{
     res.send("Get basico desde index")
 })
 
-app.use('/api/',usuarioRouter)
-app.use('/api/',alumnoRouter)
-app.use('/api/',materiaRouter)
+app.use('/api',usuarioRouter)
+app.use('/api',alumnoRouter)
+app.use('/api',materiaRouter)
 
 app.use(logError)
 app.use(errorHandler)
