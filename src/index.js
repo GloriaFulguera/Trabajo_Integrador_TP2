@@ -1,4 +1,5 @@
 const express= require('express')
+const usuarioRouter=require('./routers/usuario.router')
 const alumnoRouter=require('./routers/alumno.router')
 const materiaRouter=require('./routers/materia.router')
 const {errorHandler,logError}=require('./middlewares/error.handler')
@@ -10,6 +11,7 @@ app.get('/api',(req,res)=>{
     res.send("Get basico desde index")
 })
 
+app.use('/api/',usuarioRouter)
 app.use('/api/',alumnoRouter)
 app.use('/api/',materiaRouter)
 
