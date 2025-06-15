@@ -1,41 +1,47 @@
-const usuarios=require('../data/usuarios')
+const getConnection =require('../db/mysql')
+const bcrypt=require('bcrypt')
 
 class AlumnoService{
-    constructor(){
-        this.usuarios=usuarios.infoUsuarios
-    }
-
     async get(){
-        return (this.usuarios).usuarios.filter(usuario=>usuario.rol==="alumno")
+        const connection=await getConnection()
+        const select="SELECT * FROM usuarios"
+        const usuarios=await connection.query(select)
+        return usuarios
     }
 
     async getPorId(id){
-        for(let i=0;i<(this.usuarios).usuarios.length;i++){
-            if(this.usuarios.usuarios[i].id.toString()===id){
-                return this.usuarios.usuarios[i]
-            }
-        }
-        throw new Error("El alumno con id ... no existe")
+        const connection=await getConnection()
+        const select="SELECT * FROM usuarios WHERE id=?"
+        const usuario=await connection.query(select,[id])
+        return usuario
     }
 
     async post(alumno){
-        this.usuarios.usuarios.push(alumno)
-        return alumno
+        const connection=await getConnection()
+        const hash=await bcrypt.hash(alumno.password,10)
+        const insert=`INSERT INTO usuarios(Nombre,Mail,Username,Password,Rol,usu_alta,fe_alta)
+        VALUES (?,?,?,?,?,?,now())`
+        const valueInsert=[alumno.nombre,alumno.mail,alumno.username,hash,3,"prueba"]
+        const result=await connection.query(insert,valueInsert)
+
+        const nuevoId=result.insertId
+        return {nuevoId,...alumno}
     }
 
     async put(id,alumnoEditado){
-        const alumno=this.usuarios.usuarios.indexOf(x=>x.id==id)
-        usuarios.usuarios=alumnoEditado.nombre
-        alumno.mail=alumnoEditado.mail
-        alumno.rol=alumnoEditado.rol
-        console.log(alumno)
-        
-        this.usuarios.usuarios.push(alumno)
-        return alumno
+        const connection=await getConnection()
+        const update=`UPDATE usuarios SET Nombre=?, Mail=?, Username=?, usu_mod=?, fe_mod=now()
+        WHERE id=?`
+        const valueUpdate=[alumnoEditado.nombre,alumnoEditado.mail,alumnoEditado.username,"pruebMod",id]
+        const result=connection.query(update,valueUpdate)
+        return result
     }
 
     async delete(id){
-        console.log("eliminando")
+        const connection=await getConnection()
+        const update="UPDATE usuarios SET usu_baja=?, fe_baja=now() WHERE id=?"
+        const result=connection.query(update,["prueba",id])
+        return result
     }
 }
 
