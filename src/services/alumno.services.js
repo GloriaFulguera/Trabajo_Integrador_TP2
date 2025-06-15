@@ -21,7 +21,7 @@ class AlumnoService{
         const hash=await bcrypt.hash(alumno.password,10)
         const insert=`INSERT INTO usuarios(Nombre,Mail,Username,Password,Rol,usu_alta,fe_alta)
         VALUES (?,?,?,?,?,?,now())`
-        const valueInsert=[alumno.nombre,alumno.mail,alumno.username,hash,3,"prueba"]
+        const valueInsert=[alumno.nombre,alumno.mail,alumno.username,hash,3,alumno.userMod]
         const result=await connection.query(insert,valueInsert)
 
         const nuevoId=result.insertId
@@ -37,10 +37,10 @@ class AlumnoService{
         return result
     }
 
-    async delete(id){
+    async delete(id,data){
         const connection=await getConnection()
         const update="UPDATE usuarios SET usu_baja=?, fe_baja=now() WHERE id=?"
-        const result=connection.query(update,["prueba",id])
+        const result=connection.query(update,[data.userMod,id])
         return result
     }
 }

@@ -57,7 +57,8 @@ async function putAlumno(req,res){
 async function deleteAlumno(req,res){
     try{
         const id=req.params.id
-        await service.delete(id)
+        const data=req.body
+        await service.delete(id,data)
         res.send("El alumno ha sido dado de baja")
     }
     catch(error){
