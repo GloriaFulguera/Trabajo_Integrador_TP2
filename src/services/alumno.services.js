@@ -32,7 +32,7 @@ class AlumnoService{
         const connection=await getConnection()
         const update=`UPDATE usuarios SET Nombre=?, Mail=?, Username=?, usu_mod=?, fe_mod=now()
         WHERE id=?`
-        const valueUpdate=[alumnoEditado.nombre,alumnoEditado.mail,alumnoEditado.username,"pruebMod",id]
+        const valueUpdate=[alumnoEditado.nombre,alumnoEditado.mail,alumnoEditado.username,alumnoEditado.userMod,id]
         const result=connection.query(update,valueUpdate)
         return result
     }
