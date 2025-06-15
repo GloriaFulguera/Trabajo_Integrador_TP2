@@ -28,7 +28,7 @@ class UsuarioService{
             return bcrypt.compare(data.password,pass)
             .then(sonIguales=>{
                 if(sonIguales){
-                    const token={token:sign({id,username})}
+                    const token={token:sign({id,username,rol})}
                     return{login:true,...token}
                 }
                 else{
