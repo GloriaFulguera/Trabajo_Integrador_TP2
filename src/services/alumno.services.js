@@ -4,14 +4,14 @@ const bcrypt=require('bcrypt')
 class AlumnoService{
     async get(){
         const connection=await getConnection()
-        const select="SELECT * FROM usuarios"
+        const select=`SELECT id,nombre,mail,username FROM usuarios WHERE rol=3`
         const usuarios=await connection.query(select)
         return usuarios
     }
 
     async getPorId(id){
         const connection=await getConnection()
-        const select="SELECT * FROM usuarios WHERE id=?"
+        const select="SELECT id,nombre,mail,username FROM usuarios WHERE id=? AND rol=3"
         const usuario=await connection.query(select,[id])
         return usuario
     }
@@ -25,7 +25,7 @@ class AlumnoService{
         const result=await connection.query(insert,valueInsert)
 
         const nuevoId=result.insertId
-        return {nuevoId,...alumno}
+        return {message:`Se genero un nuevo alumno con id: ${nuevoId}`}
     }
 
     async put(id,alumnoEditado){
@@ -33,15 +33,20 @@ class AlumnoService{
         const update=`UPDATE usuarios SET Nombre=?, Mail=?, Username=?, usu_mod=?, fe_mod=now()
         WHERE id=?`
         const valueUpdate=[alumnoEditado.nombre,alumnoEditado.mail,alumnoEditado.username,alumnoEditado.userMod,id]
-        const result=connection.query(update,valueUpdate)
-        return result
+        connection.query(update,valueUpdate)
+        return {
+                id: id,
+                nombre: alumnoEditado.nombre,
+                mail: alumnoEditado.mail,
+                username: alumnoEditado.username
+                };
     }
 
     async delete(id,data){
         const connection=await getConnection()
         const update="UPDATE usuarios SET usu_baja=?, fe_baja=now() WHERE id=?"
-        const result=connection.query(update,[data.userMod,id])
-        return result
+        connection.query(update,[data.userMod,id])
+        return {message:"Alumno dado de baja correctamente"}
     }
 }
 
