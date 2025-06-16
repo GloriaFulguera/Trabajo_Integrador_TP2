@@ -28,4 +28,17 @@ async function getMateriasAlumno(req,res) {
     }
 }
 
-module.exports={postInscripcion,getMateriasAlumno}
+async function getAlumnosMateria(req,res) {
+    try{
+        const id=req.params.id
+        const ins=await service.getAlumnosMateria(id)
+        res.send(ins)
+    }
+    catch(error){
+        res.status(500).json({
+            message:error.message
+        })
+    }
+}
+
+module.exports={postInscripcion,getMateriasAlumno,getAlumnosMateria}

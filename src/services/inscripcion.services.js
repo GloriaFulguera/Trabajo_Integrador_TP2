@@ -17,5 +17,11 @@ class InscripcionService{
         return result
     }
 
+    async getAlumnosMateria(id){
+        const connection=await getConnection()
+        const select=`SELECT * FROM inscripciones WHERE id_materia=?`
+        const result=await connection.query(select,[id])
+        return result
+    }
 }
 module.exports=InscripcionService
