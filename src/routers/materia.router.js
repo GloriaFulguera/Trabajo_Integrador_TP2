@@ -12,14 +12,14 @@ const materiaRouter=express.Router()
 
 materiaRouter.use(express.json())
 
-materiaRouter.get('/materias',getMaterias)
+materiaRouter.get('/',getMaterias)
 
-materiaRouter.get('/materias/:id',getMateriaId)
+materiaRouter.get('/:id',getMateriaId)
 
-materiaRouter.post('/materias',checkAdmin(),postMaterias)
+materiaRouter.post('/',checkAdmin(),postMaterias)
 
-materiaRouter.put('/materias/:id',checkAdmin(),putMaterias)
+materiaRouter.put('/:id',checkAdmin(),putMaterias)
 
-materiaRouter.delete('/materias/:id',checkAdmin(),deleteMaterias)
+materiaRouter.delete('/:id',checkAdmin(),deleteMaterias)
 
 module.exports=materiaRouter

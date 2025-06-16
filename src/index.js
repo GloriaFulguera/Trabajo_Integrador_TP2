@@ -12,8 +12,8 @@ app.get('/api',(req,res)=>{
 })
 
 app.use('/api',usuarioRouter)
-app.use('/api',alumnoRouter)
-app.use('/api',materiaRouter)
+app.use('/api/alumnos',alumnoRouter)
+app.use('/api/materias',materiaRouter)
 
 app.use(logError)
 app.use(errorHandler)

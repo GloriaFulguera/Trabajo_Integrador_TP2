@@ -15,10 +15,10 @@ const alumnoRouter=express.Router()
 alumnoRouter.use(express.json())
 
 //TO DO: Agregar middlewares
-alumnoRouter.get('/alumnos', getAlumnos)
-alumnoRouter.get('/alumnos/:id', validatorHandler(paramAlumnoSchema,'params'), getAlumnoId) //getAlumnoId)
-alumnoRouter.post('/alumnos',checkAdmin(),postAlumno)
-alumnoRouter.put('/alumnos/:id',checkAdminOrStd(),putAlumno)
-alumnoRouter.delete('/alumnos/:id',checkAdmin(),deleteAlumno)
+alumnoRouter.get('/', getAlumnos)
+alumnoRouter.get('/:id', validatorHandler(paramAlumnoSchema,'params'), getAlumnoId) //getAlumnoId)
+alumnoRouter.post('/',checkAdmin(),postAlumno)
+alumnoRouter.put('/:id',checkAdminOrStd(),putAlumno)
+alumnoRouter.delete('/:id',checkAdmin(),deleteAlumno)
 
 module.exports=alumnoRouter
