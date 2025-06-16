@@ -2,7 +2,8 @@ const express=require('express')
 const {
     postInscripcion,
     getMateriasAlumno,
-    getAlumnosMateria
+    getAlumnosMateria,
+    deleteInscripcion
 }=require('../controllers/inscripcion.controller')
 const {checkAdmin,checkAdminOrStd}=require('../middlewares/secure')
 
@@ -14,5 +15,7 @@ inscripcionRouter.post('/inscripciones',checkAdminOrStd(),postInscripcion)
 inscripcionRouter.get('/alumnos/:id/materias',getMateriasAlumno)
 
 inscripcionRouter.get('/materias/:id/alumnos',getAlumnosMateria)
+
+inscripcionRouter.delete('/inscripciones',checkAdminOrStd(),deleteInscripcion)
 
 module.exports=inscripcionRouter
