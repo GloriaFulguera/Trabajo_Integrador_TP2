@@ -2,45 +2,39 @@ const AlumnoService=require('../services/alumno.services')
 
 const service=new AlumnoService()
 
-async function getAlumnos(req,res){
+async function getAlumnos(req,res,next){
     try{
         const usuarios= await service.get()
         res.send(usuarios)
     }
     catch(error){
-        res.status(500).json({
-            message:error.message
-        })
+        next(error)
     }
 }
 
-async function getAlumnoId(req,res){
+async function getAlumnoId(req,res,next){
     try{
         const alumnoId=req.params.id
         const alumno= await service.getPorId(alumnoId)
         res.send(alumno)
     }
     catch(error){
-        res.status(404).json({
-            message:error.message
-        })
+        next(error)
     }
 }
 
-async function postAlumno(req,res){
+async function postAlumno(req,res,next){
     try{
         const aNuevo=req.body
         const alumnoNuevo=await service.post(aNuevo)
         res.send(alumnoNuevo)
     }
     catch(error){
-        res.status(400).json({
-            message:error.message
-        })
+        next(error)
     }
 }
 
-async function putAlumno(req,res){
+async function putAlumno(req,res,next){
     try{
         const id=req.params.id
         const aEdit=req.body
@@ -48,23 +42,19 @@ async function putAlumno(req,res){
         res.send(alumnoEdit)
     }
     catch(error){
-        res.status(400).json({
-            message:error.message
-        })
+        next(error)
     }
 } 
 
-async function deleteAlumno(req,res){
+async function deleteAlumno(req,res,next){
     try{
         const id=req.params.id
         const data=req.body
-        await service.delete(id,data)
-        res.send("El alumno ha sido dado de baja")
+        const del=await service.delete(id,data)
+        res.send(del)
     }
     catch(error){
-        res.status(400).json({
-            message:error.message
-        })
+        next(error)
     }
 }
 
