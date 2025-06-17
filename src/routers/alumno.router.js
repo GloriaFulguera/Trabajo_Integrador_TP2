@@ -6,7 +6,7 @@ const {
     putAlumno,
     deleteAlumno
 } =require('../controllers/alumno.controller')
-const {paramAlumnoSchema}=require('../schemas/alumno.schema')
+const {paramAlumnoSchema,postAlumnoSchema,putAlumnoSchema}=require('../schemas/alumno.schema')
 const {validatorHandler}=require('../middlewares/validator.handler')
 const {
     checkAdmin,
@@ -18,11 +18,25 @@ const alumnoRouter=express.Router()
 
 alumnoRouter.use(express.json())
 
-//TO DO: Agregar middlewares
-alumnoRouter.get('/',checkAdminOrCoord(),getAlumnos)
-alumnoRouter.get('/:id',checkAdminCoordOrStd(),validatorHandler(paramAlumnoSchema,'params'), getAlumnoId) //getAlumnoId)
-alumnoRouter.post('/',checkAdmin(),postAlumno)
-alumnoRouter.put('/:id',checkAdminOrStd(),putAlumno)
-alumnoRouter.delete('/:id',checkAdmin(),deleteAlumno)
+alumnoRouter.get('/',
+    checkAdminOrCoord(),
+    getAlumnos)
+alumnoRouter.get('/:id',
+    checkAdminCoordOrStd(),
+    validatorHandler(paramAlumnoSchema,'params'),
+    getAlumnoId)
+alumnoRouter.post('/',
+    checkAdmin(),
+    validatorHandler(postAlumnoSchema),
+    postAlumno)
+alumnoRouter.put('/:id',
+    checkAdminOrStd(),
+    validatorHandler(paramAlumnoSchema,'params'),
+    validatorHandler(putAlumnoSchema,'body'),
+    putAlumno)
+alumnoRouter.delete('/:id',
+    checkAdmin(),
+    validatorHandler(paramAlumnoSchema,'params'),
+    deleteAlumno)
 
 module.exports=alumnoRouter

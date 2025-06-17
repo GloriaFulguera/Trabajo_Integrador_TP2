@@ -30,6 +30,15 @@ class AlumnoService{
 
     async put(id,alumnoEditado){
         const connection=await getConnection()
+        const existe=`SELECT 1 EXISTE FROM usuarios
+        WHERE username=? AND id != ?`
+        const resExiste=await connection.query(existe,[alumnoEditado.username,id])
+        if(resExiste[0]){
+            const error=new Error("El nombre de usuario ya está en uso")
+            error.status=409
+            throw error
+        }
+
         const update=`UPDATE usuarios SET Nombre=?, Mail=?, Username=?, usu_mod=?, fe_mod=now()
         WHERE id=?`
         const valueUpdate=[alumnoEditado.nombre,alumnoEditado.mail,alumnoEditado.username,alumnoEditado.userMod,id]

@@ -89,7 +89,7 @@ function checkAdminCoordOrStd(){
                 return next()
             }
         }
-        const error=new Error("Debe estar logueado para acceder")
+        const error=new Error("No tiene permisos para acceder a esta información.")
         error.status=401
         next(error)
     }
