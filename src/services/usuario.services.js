@@ -3,13 +3,13 @@ const {sign}=require('../utils/jwt')
 const bcrypt=require('bcrypt')
 
 class UsuarioService{
-    async crearUsuario(usuarioNuevo){
+    async crearUsuario(usuarioNuevo){//para dar de alta Admins y Coordinadores
         const connection=await getConnection()
         const hash=await bcrypt.hash(usuarioNuevo.password,10)
 
         const insert=`INSERT INTO usuarios(Nombre,Mail,Username,Password,Rol,usu_alta,fe_alta)
         values (?,?,?,?,?,?,now())`//las commitas esas van con ALT+96
-        const valueInsert=[usuarioNuevo.nombre,usuarioNuevo.mail,usuarioNuevo.username,hash,usuarioNuevo.rol,"localhost"]
+        const valueInsert=[usuarioNuevo.nombre,usuarioNuevo.mail,usuarioNuevo.username,hash,usuarioNuevo.rol,usuarioNuevo.userMod]
 
         const result=await connection.query(insert,valueInsert)
 
@@ -23,7 +23,7 @@ class UsuarioService{
 
         const usuario=await connection.query(select,[data.usuario])
         if(usuario[0]){
-            const {id,nombre,mail,username,pass,rol}=usuario[0]
+            const {id,username,pass,rol}=usuario[0]
 
             return bcrypt.compare(data.password,pass)
             .then(sonIguales=>{
