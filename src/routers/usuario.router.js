@@ -8,8 +8,8 @@ const usuarioRouter=express.Router()
 usuarioRouter.use(express.json())
 
 usuarioRouter.post('/',
-    checkAdmin(),
     validatorHandler(createUsuarioSchema,'body'),
+    checkAdmin(),
     crearUsuario)
 usuarioRouter.post('/login',
     validatorHandler(loginUsuarioSchema,'body'),

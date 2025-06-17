@@ -35,8 +35,8 @@ messages({
     'number.max':'El rol debe ser menor o igual a {#limit}',
     'number.base':'El valor debe ser un número entero'
 })
-const usuarioAudit=joi.string().optional()
-const usuarioRolAudit=joi.number().valid(1, 2, 3).optional()
+const usuarioAudit = joi.any().forbidden()
+const usuarioRolAudit = joi.any().forbidden()
 
 const loginUsuarioSchema=joi.object({
     usuario:usuario,
