@@ -58,7 +58,7 @@ async function deleteMaterias(req,res) {
         const id=req.params.id
         const data=req.body
         const respuesta=await service.delete(id,data)
-        res.send("Materia dada de baja exitosamente")
+        res.send(respuesta)
     }
     catch(error){
         res.status(500).json({

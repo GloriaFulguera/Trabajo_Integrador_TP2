@@ -5,17 +5,34 @@ const {
     getAlumnosMateria,
     deleteInscripcion
 }=require('../controllers/inscripcion.controller')
-const {checkAdmin,checkAdminOrStd}=require('../middlewares/secure')
+const {postInscripcionSchema,paramInscripcionSchema}=require('../schemas/inscripcion.schema')
+const {validatorHandler}=require('../middlewares/validator.handler')
+const {
+    checkAdminCoordOrStd,
+    checkAdminOrCoord,
+    checkAdminOrStd}=require('../middlewares/secure')
 
 const inscripcionRouter=express.Router()
 inscripcionRouter.use(express.json())
 
-inscripcionRouter.post('/inscripciones',checkAdminOrStd(),postInscripcion)
+inscripcionRouter.post('/inscripciones',
+    checkAdminOrStd(),
+    validatorHandler(postInscripcionSchema,'body'),
+    postInscripcion)
 
-inscripcionRouter.get('/alumnos/:id/materias',getMateriasAlumno)
+inscripcionRouter.get('/alumnos/:id/materias',
+    checkAdminCoordOrStd(),
+    validatorHandler(paramInscripcionSchema,'params'),
+    getMateriasAlumno)
 
-inscripcionRouter.get('/materias/:id/alumnos',getAlumnosMateria)
+inscripcionRouter.get('/materias/:id/alumnos',
+    checkAdminOrCoord(),
+    validatorHandler(paramInscripcionSchema,'params'),
+    getAlumnosMateria)
 
-inscripcionRouter.delete('/inscripciones',checkAdminOrStd(),deleteInscripcion)
+inscripcionRouter.delete('/inscripciones',
+    checkAdminOrStd(),
+    validatorHandler(postInscripcionSchema,'body'),
+    deleteInscripcion)
 
 module.exports=inscripcionRouter
