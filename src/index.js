@@ -7,9 +7,11 @@ const {errorHandler,logError}=require('./middlewares/error.handler')
 
 const app=express()
 
-//TO DO: cambiarlo por easter egg
-app.get('/api',(req,res)=>{
-    res.send("Get basico desde index")
+app.get('/api/porfavor',(req,res)=>{
+    res.send({
+        "easter-egg":":)",
+        "ver":"https://vm.tiktok.com/ZMBWVHoJ5/"
+    })
 })
 
 app.use('/api',usuarioRouter)
